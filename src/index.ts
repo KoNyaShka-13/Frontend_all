@@ -1,3 +1,3 @@
-import { someFn } from "./test";
+import { someFn } from "./test";//Не указываем тип файла, так как в конфиге сделали настройки
 
-someFn()
+someFn(123)

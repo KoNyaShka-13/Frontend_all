@@ -1,6 +1,11 @@
 import path from 'path';
 import webpack from 'webpack';
+//import {buildWebpackConfig} from "./config/build/buildWebpackConfig";
+//import {BuildPaths} from "./config/build/types/config";
 import HTMLWebpackPlugin from "html-webpack-plugin";//импортируем, как в ts
+import { buildPlugins } from './config/build/buildPlugins';
+import { buildResolvers } from './config/build/buildResolvers';
+import { buildLoaders } from './config/build/buildLoaders';
 //const path = require('path');//Это импорт js
 //const HTMLWebpackPlugin = require('html-webpack-plugin');//Так как пока что пишем в среде NODE-JS, то используем require
 //const webpack = require('webpack');
@@ -14,25 +19,11 @@ const config: webpack.Configuration = {//Указываем тип, чтобы �
         path: path.resolve(__dirname, 'build'),
         clean: true,//Удаляем старые версии сайта
     },
-        plugins: [
-            new HTMLWebpackPlugin({
-                //Будем использовать файл из паблика, как шаблон, чтобы в него все скрипты вслаивались
-                template: path.resolve(__dirname, 'public', 'index.html')//div.root сейчас не отображается при загрузке, так как создается с нуля, эта строка загружает его
-            }),
-            new webpack.ProgressPlugin(),//Отображает прогресс
-        ],
+        plugins: buildPlugins(),//Берем билдплагин
         module: {
-            rules: [
-                {
-                test: /\.tsx?$/,//Отображаются файлы, которые нужно пропустить через лоадер
-                use: 'ts-loader',
-                exclude: /node_modules/,
-                },
-            ],
+            rules: buildLoaders()
         },
-        resolve: {
-        extensions: ['.tsx', '.ts', '.js'],//Указываем те файлы, для которых не будем указывать расширения при импорте
-        },
+        resolve: buildResolvers(),
 }
  
 export default config;

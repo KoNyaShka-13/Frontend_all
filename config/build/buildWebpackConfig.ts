@@ -8,7 +8,7 @@ import {buildResolvers} from "./buildResolvers";
 import { buildDevServer } from "./buildDevServer";
 
 export function buildWebpackConfig(options: BuildOptions): webpack.Configuration {
-    const {paths, mode} = options;//деструктуризация
+    const {paths, mode, isDev} = options;//деструктуризация
 
     return {
         mode: mode,
@@ -23,7 +23,8 @@ export function buildWebpackConfig(options: BuildOptions): webpack.Configuration
             rules: buildLoaders(),
         },
         resolve: buildResolvers(),
-        devtool: 'inline-source-map',//чтобы легче было отслеживать ошибки
-        devServer: buildDevServer(options),
+        //Это настройки, если режим разработки(dev), то параметры будут использоваться, в противном случае - нет
+        devtool: isDev ? 'inline-source-map' : undefined,//чтобы легче было отслеживать ошибки
+        devServer: isDev ? buildDevServer(options) : undefined,
     }
 }

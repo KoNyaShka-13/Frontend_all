@@ -7,7 +7,7 @@ export default (env: BuildEnv) => {//Эта функция аргументом 
 
 
     const paths: BuildPaths = {
-        entry: path.resolve(__dirname, 'src', 'index.ts'),
+        entry: path.resolve(__dirname, 'src', 'index.tsx'),
         build: path.resolve(__dirname, 'build'),
         html: path.resolve(__dirname, 'public', 'index.html'),
     }

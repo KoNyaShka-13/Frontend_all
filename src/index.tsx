@@ -1,6 +1,9 @@
-import { render } from "react-dom";
+import {render} from "react-dom";
+import Counter from "./components/Counter";
 
 render(
-    <div>dkdk</div>,
+    <div>
+        <Counter/>
+    </div>,
     document.getElementById('root')
 )

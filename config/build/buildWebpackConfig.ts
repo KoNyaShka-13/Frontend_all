@@ -20,7 +20,7 @@ export function buildWebpackConfig(options: BuildOptions): webpack.Configuration
         },
         plugins: buildPlugins(options),
         module: {
-            rules: buildLoaders(),
+            rules: buildLoaders(options),
         },
         resolve: buildResolvers(),
         //Это настройки, если режим разработки(dev), то параметры будут использоваться, в противном случае - нет
